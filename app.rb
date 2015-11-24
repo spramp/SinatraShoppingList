@@ -1,9 +1,9 @@
 require 'bundler'
-Bundler.require()
+Bundler.require
 
 get '/' do
 
-  erb :index
+  erb :home
 
 end
 
