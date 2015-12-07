@@ -31,7 +31,7 @@ class ItemController < ApplicationController
     @item.save
 
     # return view
-    @message = 'You item was added!'
+    @message = 'Your item was added!'
     erb :message
   end
 

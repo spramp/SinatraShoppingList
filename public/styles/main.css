@@ -1,0 +1,10 @@
+body {
+  margin: 100px;
+  padding: 100px;
+}
+
+h1 {
+  font-family: 'Miniver', cursive;
+  font-size: 120px;
+  color: rgb(252, 106, 255);
+}
