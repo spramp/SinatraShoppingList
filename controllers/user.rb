@@ -1,6 +1,10 @@
 class UserController < ApplicationController
+    # User login, register, and logout
 
 
+
+    # shouldn't be able to get to this page, but in case, go to
+    # the items class root
     get "/" do
       authorization_check
       @user_name = session[:current_user].user_name
@@ -16,16 +20,22 @@ class UserController < ApplicationController
 
 
 
+    # user registration
     get "/register" do
       erb :register
     end
     post "/register" do
+      # check if the user name already exists
       if does_user_exist(params[:user_name]) == true
         return {:message => "user already exists"}.to_json
       end
+      # if the form has been filled out properly
       if (params[:user_email] != "" && params[:user_name] != "" && params[:password] != "")
+        # make the user name
         user = Account.create(user_email: params[:user_email], user_name: params[:user_name], password: params[:password])
+        # save into session control
         session[:current_user] = user
+        # force the URL to the items root to show list
         redirect "/items/"
       else
         @message = "All fields must have a value"
@@ -35,17 +45,20 @@ class UserController < ApplicationController
 
 
 
+    # user login
     get "/login" do
       erb :login
     end
     post "/login" do
       if (does_user_exist(params[:user_name]) == true &&
          params[:password] != "")
+        # Authenticate user for login
         user = Account.authenticate(params[:user_name], params[:password])
         if user
           session[:current_user] = user
           redirect "/items/"
         else
+          # TODO: improve error msg - something like bootstrap's forms
           @message = "Your password or account information is incorrect"
           erb :login
         end
@@ -54,10 +67,13 @@ class UserController < ApplicationController
       end
     end
 
+
+
+    # logout
     get "/logout" do
       authorization_check
       session[:current_user] = nil
       redirect "/"
     end
 
-end
+end # end of CLASS

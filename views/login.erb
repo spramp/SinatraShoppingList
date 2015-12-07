@@ -1,1 +1,31 @@
-<p>Hello, I am login</p>
+<div class="container">
+     <div class="row">
+
+       <div class="col-xs-12">
+         <!-- if there is a message -->
+         <% if @message %>
+             <!-- print that message -->
+             <p class="text-center" id="warning-message"><strong><%= @message %></strong></p>
+         <% end %>
+       </div>
+
+       <div class="col-xs-6">
+         <form class="" action="/users/login" method="post">
+           <input class="form-control text-center" type="text" name="user_name" placeholder="Username">
+           <input class="form-control text-center" type="password" name="password" placeholder="Password">
+           <input class="form-control form-btn" id="btn_login" type="submit" value="Login">
+         </form>
+       </div>
+
+       <div class="col-xs-6">
+         <form class="" action="/users/register" method="post">
+           <input class="form-control text-center" type="text" name="user_name" placeholder="Username">
+           <input class="form-control text-center" type="text" name="user_email" placeholder="Email">
+           <input class="form-control text-center" type="password" name="password" placeholder="Password">
+          
+           <input class="form-control form-btn" id="btn_register" type="submit" value="Register">
+         </form>
+       </div>
+
+     </div>
+   </div>

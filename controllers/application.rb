@@ -1,18 +1,23 @@
 class ApplicationController < Sinatra::Base
-  require 'bundler'
+
+  require "bundler"
   Bundler.require
 
   ActiveRecord::Base.establish_connection(
-    :database => 'shopping_list',
-    :adapter => 'postgresql' #unless you're too hip ;)
+    :adapter => "postgresql",
+    :database => "shopping_list"
   )
 
-  set :views, File.expand_path('../../views', __FILE__)
-  set :public_dir, File.expand_path('../../public', __FILE__)
+  # Need to specify the views / public folder!
+  set :views, File.expand_path("../../views", __FILE__)
+  set :public_dir, File.expand_path("../../public", __FILE__)
 
+  # enable sessions
   enable :sessions
 
 
+
+  # does the user account exist in the system?
   def does_user_exist(user_name)
     user = Account.find_by(:user_name => user_name)
     if user
@@ -22,7 +27,11 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+
+
+  # check session info with current user
   def authorization_check
+    # if there isn't a current session, redirect to login
     if session[:current_user] == nil
       redirect "/login"
     else
@@ -30,4 +39,5 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-end
+
+end # END CLASS
