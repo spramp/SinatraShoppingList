@@ -1,0 +1,23 @@
+<div class="container">
+      <div class="row">
+
+        <div class="col-xs-12">
+          <img id="logo" src="http://placehold.it/150x150">
+          <h1 class="text-center">Register</h1>
+          <% if @message %>
+              <p class="text-center" id="warning-message"><strong><%= @message %></strong></p>
+          <% end %>
+        </div>
+
+        <div class="col-xs-12">
+          <form class="" action="/users/register" method="post">
+            <input class="form-control" type="text" name="user_name" placeholder="Username">
+            <input class="form-control" type="text" name="user_email" placeholder="Email">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+
+            <input class="form-control" id="btn_register" type="submit" value="Register">
+          </form>
+        </div>
+
+      </div>
+    </div>
